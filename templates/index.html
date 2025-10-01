@@ -20,6 +20,24 @@
 
     <section id="habits-list" class="mt-4">
       <h3>Your Habits</h3>
+         <form id="habitForm" action="/add_habit" method="POST" novalidate>
+  <div class="row g-3">
+    <div class="col-md-6">
+      <label for="habit_name" class="form-label">Habit Name</label>
+      <input type="text" class="form-control" id="habit_name" name="habit_name" placeholder="e.g., Morning Exercise" required>
+      <div class="invalid-feedback">Please enter a habit name.</div>
+    </div>
+    <div class="col-md-4">
+      <label for="weekly_goal" class="form-label">Weekly Goal (days)</label>
+      <input type="number" class="form-control" id="weekly_goal" name="weekly_goal" min="1" max="7" value="7" required>
+      <div class="invalid-feedback">Goal must be between 1-7 days.</div>
+    </div>
+    <div class="col-md-2 d-flex align-items-end">
+      <button type="submit" class="btn btn-success w-100">Add Habit</button>
+    </div>
+  </div>
+</form>
+
       <p>Habits list placeholder — will render dynamically later.</p>
     </section>
   </main>
