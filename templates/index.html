@@ -42,7 +42,55 @@
         </div>
     </div>
 </section>
-
+<section>
+            <h3 class="mb-3">Your Habits</h3>
+            {% if habits %}
+                <div class="row g-3">
+                    {% for habit in habits %}
+                    <div class="col-md-6">
+                        <div class="card habit-card shadow-sm">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <h5 class="card-title mb-0">{{ habit.name }}</h5>
+                                    <form action="/delete_habit/{{ habit.id }}" method="POST" 
+                                          onsubmit="return confirm('Delete this habit?');">
+                                        <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                                    </form>
+                                </div>
+                                
+                                <p class="text-muted mb-2">
+                                    Goal: {{ habit.completed }}/{{ habit.goal }} days this week
+                                </p>
+                                
+                                <!-- Progress Bar -->
+                                <div class="progress mb-3" style="height: 25px;">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated 
+                                                {% if habit.progress == 100 %}bg-success{% else %}bg-info{% endif %}" 
+                                         role="progressbar" 
+                                         style="width: {{ habit.progress }}%;" 
+                                         aria-valuenow="{{ habit.progress }}" 
+                                         aria-valuemin="0" 
+                                         aria-valuemax="100">
+                                        {{ habit.progress }}%
+                                    </div>
+                                </div>
+                                
+                                <form action="/log_habit/{{ habit.id }}" method="POST">
+                                    <button type="submit" class="btn btn-primary w-100 mark-complete-btn">
+                                        ✓ Mark Today Complete
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="alert alert-info text-center" role="alert">
+                    No habits yet! Add your first habit above to get started. 🚀
+                </div>
+            {% endif %}
+        </section>
     </main>
 
     <!-- Footer -->
